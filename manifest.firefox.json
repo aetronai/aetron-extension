@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "AETRON Wallet",
+  "version": "0.0.1",
+  "description": "Browser wallet extension for AETRON blockchain - manage AET tokens, stake on neuronets, and interact with dApps",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "aetron-wallet@aetron.ai",
+      "strict_min_version": "121.0"
+    }
+  },
+
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "scripting",
+    "alarms"
+  ],
+
+  "host_permissions": [
+    "wss://entrypoint-mainnet.aetron.ai:443/*",
+    "wss://entrypoint-test.aetron.ai:443/*",
+    "ws://127.0.0.1:9944/*",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "type": "module"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "AETRON Wallet"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
