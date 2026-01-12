@@ -11,6 +11,9 @@
     "build:chrome": "tsc && BROWSER=chrome vite build",
     "build:firefox": "tsc && BROWSER=firefox vite build",
     "build:all": "npm run build:chrome && npm run build:firefox",
+    "package:chrome": "npm run build:chrome && ./scripts/package-extension.sh chrome",
+    "package:firefox": "npm run build:firefox && ./scripts/package-extension.sh firefox",
+    "package:all": "npm run build:all && ./scripts/package-extension.sh chrome && ./scripts/package-extension.sh firefox",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
