@@ -35,39 +35,73 @@ npm install
 3. Build the extension:
 
 ```bash
+# For Chrome
 npm run build:chrome
-```
 
-4. Load in Chrome:
-   - Open `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked"
-   - Select the `dist-chrome` folder
-
-### Firefox
-
-```bash
+# For Firefox
 npm run build:firefox
+
+# For both browsers
+npm run build:all
 ```
 
-Load the `dist-firefox` folder in `about:debugging`.
+4. Load in browser:
+
+**Chrome:**
+
+- Open `chrome://extensions/`
+- Enable "Developer mode"
+- Click "Load unpacked"
+- Select the `dist-chrome` folder
+
+**Firefox:**
+
+- Open `about:debugging#/runtime/this-firefox`
+- Click "Load Temporary Add-on"
+- Select any file in the `dist-firefox` folder
 
 ## Development
 
+### Development Mode (with hot reload)
+
 ```bash
-# Start development server with hot reload
-npm run dev
+npm run dev              # Chrome (default)
+npm run dev:chrome       # Chrome explicitly
+npm run dev:firefox      # Firefox explicitly
+```
 
-# Build for production
-npm run build:chrome
-npm run build:firefox
-npm run build:all
+### Production Build
 
-# Lint code
+```bash
+npm run build            # Chrome (default)
+npm run build:chrome     # Chrome explicitly
+npm run build:firefox    # Firefox explicitly
+npm run build:all        # Both browsers
+```
+
+Output directories: `dist-chrome/` or `dist-firefox/`
+
+### Package for Store Submission
+
+These commands build the extension and create a clean zip file without macOS hidden files:
+
+```bash
+npm run package:chrome   # Creates aetron-wallet-chrome.zip
+npm run package:firefox  # Creates aetron-wallet-firefox.zip
+npm run package:all      # Creates both zip files
+```
+
+**Important:** Always use `npm run package:*` commands to create store-ready zip files. These scripts exclude macOS metadata files (`__MACOSX`, `.DS_Store`) that cause store validation failures.
+
+### Linting
+
+```bash
 npm run lint
 ```
 
 ## Architecture
+
+### Project Structure
 
 ```
 src/
@@ -78,6 +112,14 @@ src/
 ├── lib/            # Shared utilities and messaging
 └── shared/         # Types and constants
 ```
+
+### Tech Stack
+
+- **Frontend:** React 19, React Router DOM, Tailwind CSS
+- **Blockchain:** @polkadot/api, @polkadot/keyring, @polkadot/util-crypto
+- **Build:** Vite 7, TypeScript 5
+- **i18n:** i18next (English, Russian, Chinese)
+- **Icons:** Lucide React
 
 ## dApp Integration
 
@@ -99,6 +141,27 @@ if (window.aetron) {
   const txHash = await window.aetron.sendTransaction(tx);
 }
 ```
+
+## Browser Compatibility
+
+### Chrome / Edge / Brave
+
+- Minimum version: Chrome 88+
+- Manifest V3 compatible
+
+### Firefox
+
+- Minimum version: Firefox 140+
+- Required for `data_collection_permissions` support
+- Uses inlined chunks for background script (handled automatically by build system)
+
+### Store Submission Notes
+
+**Firefox Add-ons:**
+
+- Extension declares `data_collection_permissions: { required: ["none"] }` (no user data collection)
+- Uses `strict_min_version: 140.0` to support this feature
+- Expected warnings about `innerHTML` (from React 19) are safe and can be ignored
 
 ## Security
 
