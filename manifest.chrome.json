@@ -7,8 +7,6 @@
   "permissions": [
     "storage",
     "unlimitedStorage",
-    "activeTab",
-    "scripting",
     "alarms"
   ],
 
@@ -16,7 +14,7 @@
     "wss://entrypoint-mainnet.aetron.ai:443/*",
     "wss://entrypoint-test.aetron.ai:443/*",
     "ws://127.0.0.1:9944/*",
-    "<all_urls>"
+    "https://api-explorer.aetron.io/*"
   ],
 
   "background": {
