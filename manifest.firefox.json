@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AETRON Wallet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Browser wallet extension for AETRON blockchain - manage AET tokens, stake on neuronets, and interact with dApps",
 
   "browser_specific_settings": {
@@ -14,11 +14,7 @@
     }
   },
 
-  "permissions": [
-    "storage",
-    "unlimitedStorage",
-    "alarms"
-  ],
+  "permissions": ["storage", "unlimitedStorage", "alarms"],
 
   "host_permissions": [
     "wss://entrypoint-mainnet.aetron.ai:443/*",
