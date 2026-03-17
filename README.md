@@ -155,7 +155,7 @@ if (window.aetron) {
 
 **Firefox Add-ons:**
 - Extension declares `data_collection_permissions: { required: ["none"] }` (no user data collection)
-- Uses `strict_min_version: 140.0` to support this feature
+- Uses `strict_min_version: 142.0` to support this feature
 - Expected warnings about `innerHTML` (from React 19) are safe and can be ignored
 
 ## Security
