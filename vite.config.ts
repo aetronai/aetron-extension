@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { resolve } from 'path'
 
@@ -12,14 +11,6 @@ export default defineConfig({
   base: '',
   plugins: [
     react(),
-    nodePolyfills({
-      include: ['buffer', 'crypto', 'stream', 'util', 'process'],
-      globals: {
-        Buffer: true,
-        global: true,
-        process: true,
-      },
-    }),
     viteStaticCopy({
       targets: [
         { src: `manifest.${browser}.json`, dest: '.', rename: 'manifest.json' },
@@ -34,6 +25,7 @@ export default defineConfig({
       '@popup': resolve(__dirname, 'src/popup'),
       '@background': resolve(__dirname, 'src/background'),
       '@lib': resolve(__dirname, 'src/lib'),
+      buffer: 'buffer/',
     },
   },
   build: {
@@ -76,6 +68,7 @@ export default defineConfig({
   },
   define: {
     'process.env': {},
+    'globalThis.Buffer': 'globalThis.Buffer || undefined',
     __BROWSER__: JSON.stringify(browser),
   },
 })
