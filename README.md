@@ -9,7 +9,7 @@ Browser extension wallet for the AETRON blockchain. Manage AET tokens, stake on 
 - **Staking** — Stake on neuronets and manage delegations
 - **Multi-Account** — Manage multiple coldkeys and hotkeys
 - **dApp Integration** — Connect to decentralized applications
-- **Multi-Language** — English, Russian, Chinese
+- **Multi-Language** — English, Russian, Chinese, French, German, Spanish, Portuguese, Turkish
 
 ## Installation
 
@@ -48,14 +48,12 @@ npm run build:all
 4. Load in browser:
 
 **Chrome:**
-
 - Open `chrome://extensions/`
 - Enable "Developer mode"
 - Click "Load unpacked"
 - Select the `dist-chrome` folder
 
 **Firefox:**
-
 - Open `about:debugging#/runtime/this-firefox`
 - Click "Load Temporary Add-on"
 - Select any file in the `dist-firefox` folder
@@ -117,8 +115,8 @@ src/
 
 - **Frontend:** React 19, React Router DOM, Tailwind CSS
 - **Blockchain:** @polkadot/api, @polkadot/keyring, @polkadot/util-crypto
-- **Build:** Vite 7, TypeScript 5
-- **i18n:** i18next (English, Russian, Chinese)
+- **Build:** Vite 8, TypeScript 5
+- **i18n:** i18next (English, Russian, Chinese, French, German, Spanish, Portuguese, Turkish)
 - **Icons:** Lucide React
 
 ## dApp Integration
@@ -145,12 +143,10 @@ if (window.aetron) {
 ## Browser Compatibility
 
 ### Chrome / Edge / Brave
-
 - Minimum version: Chrome 88+
 - Manifest V3 compatible
 
 ### Firefox
-
 - Minimum version: Firefox 140+
 - Required for `data_collection_permissions` support
 - Uses inlined chunks for background script (handled automatically by build system)
@@ -158,7 +154,6 @@ if (window.aetron) {
 ### Store Submission Notes
 
 **Firefox Add-ons:**
-
 - Extension declares `data_collection_permissions: { required: ["none"] }` (no user data collection)
 - Uses `strict_min_version: 140.0` to support this feature
 - Expected warnings about `innerHTML` (from React 19) are safe and can be ignored
